@@ -80,33 +80,33 @@ Mark tasks `[x]` as completed. Update "Current Phase" in `.claude/context.md` af
 
 **Goal:** Pluggable connector system. All three connector types working. De-dup applied end-to-end.
 
-- [ ] 2.1 Define `IConnector` interface (`ReconPlatform.Connectors/Interfaces/IConnector.cs`)
+- [x] 2.1 Define `IConnector` interface (`ReconPlatform.Connectors/Interfaces/IConnector.cs`)
   - `Task<IEnumerable<Dictionary<string, object>>> PullAsync(SourceConfig config, CancellationToken ct)`
   - `Task<bool> TestConnectionAsync(SourceConfig config, CancellationToken ct)`
   - Shared retry policy via Polly (3 attempts, exponential backoff)
-- [ ] 2.2 Implement `RestApiConnector` (`ReconPlatform.Connectors/RestApiConnector.cs`)
+- [x] 2.2 Implement `RestApiConnector` (`ReconPlatform.Connectors/RestApiConnector.cs`)
   - OAuth2 client credentials, API key (header/query), Bearer token
   - JSONPath field extraction
   - Pagination: cursor and offset patterns
   - `IHttpClientFactory` (never `new HttpClient()`)
-- [ ] 2.3 Implement `AzureSqlConnector` (`ReconPlatform.Connectors/AzureSqlConnector.cs`)
+- [x] 2.3 Implement `AzureSqlConnector` (`ReconPlatform.Connectors/AzureSqlConnector.cs`)
   - Execute configured SQL query; managed identity + connection string auth
   - Parameterized queries only — no string interpolation
-- [ ] 2.4 Implement `AzureAdxConnector` (`ReconPlatform.Connectors/AzureAdxConnector.cs`)
+- [x] 2.4 Implement `AzureAdxConnector` (`ReconPlatform.Connectors/AzureAdxConnector.cs`)
   - Execute KQL query; managed identity auth
   - `Microsoft.Azure.Kusto.Data` SDK
-- [ ] 2.5 Implement plugin loader (`ReconPlatform.Connectors/PluginLoader.cs`)
+- [x] 2.5 Implement plugin loader (`ReconPlatform.Connectors/PluginLoader.cs`)
   - Load connector from assembly/type name in config
   - Restrict plugin paths to `plugins/` directory (prevent path traversal)
   - Example plugin at `plugins/ExamplePlugin.cs`
-- [ ] 2.6 Implement normalizer (`ReconPlatform.Engine/Normalizer.cs`)
+- [x] 2.6 Implement normalizer (`ReconPlatform.Engine/Normalizer.cs`)
   - Map raw source dict → `CanonicalAsset` using source `mapping` config
   - JSONPath for nested fields; fill defaults for missing optional fields
-- [ ] 2.7 Implement diff engine (`ReconPlatform.Engine/DiffEngine.cs`)
+- [x] 2.7 Implement diff engine (`ReconPlatform.Engine/DiffEngine.cs`)
   - Compare Cosmos `current` with new pull
   - Produce `added_*`, `removed_*`, `changed_*` per field
   - Only update `last_changed` on meaningful diff
-- [ ] 2.8 Python agent scaffold (`agent/`)
+- [x] 2.8 Python agent scaffold (`agent/`)
   - FastAPI `/query` endpoint stub
   - Configurable LLM provider via `agent/config.yaml` (anthropic or azure_openai)
   - Tool stubs: `query_assets`, `get_asset_history`, `trigger_pull`, `get_stale_assets`

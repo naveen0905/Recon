@@ -9,10 +9,11 @@ namespace ReconPlatform.Plugins;
 /// </summary>
 public sealed class ExamplePlugin : IConnector
 {
+    public string ConnectorType => "plugin";
+
     public async Task<IEnumerable<Dictionary<string, object>>> PullAsync(
         SourceConfig config, CancellationToken ct)
     {
-        // TODO: implement actual data pull
         await Task.Delay(0, ct);
         return [];
     }
