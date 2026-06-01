@@ -4,7 +4,7 @@
     <PackageReference Include="Microsoft.Identity.Web" />
     <PackageReference Include="Serilog.AspNetCore" />
     <PackageReference Include="Serilog.Sinks.Console" />
-    <PackageReference Include="Serilog.Sinks.AzureAnalytics" />
+    <!-- Azure Monitor sink added in Task 7.1 -->
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../ReconPlatform.Config/ReconPlatform.Config.csproj" />

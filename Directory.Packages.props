@@ -9,7 +9,8 @@
     <PackageVersion Include="Azure.Storage.Blobs" Version="12.20.0" />
     <PackageVersion Include="Azure.Messaging.ServiceBus" Version="7.18.0" />
     <PackageVersion Include="Microsoft.Azure.Cosmos" Version="3.39.0" />
-    <PackageVersion Include="Microsoft.Azure.Kusto.Data" Version="12.0.1" />
+    <!-- Kusto SDK: 11.3.5 is a confirmed stable release -->
+    <PackageVersion Include="Microsoft.Azure.Kusto.Data" Version="11.3.5" />
     <PackageVersion Include="Microsoft.Data.SqlClient" Version="5.2.1" />
     <!-- Web / Auth -->
     <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.6" />
@@ -24,7 +25,9 @@
     <!-- Logging -->
     <PackageVersion Include="Serilog.AspNetCore" Version="8.0.1" />
     <PackageVersion Include="Serilog.Sinks.Console" Version="6.0.0" />
-    <PackageVersion Include="Serilog.Sinks.AzureAnalytics" Version="4.3.2" />
+    <!-- Serilog.Sinks.AzureAnalytics removed: community package with deprecated ADAL
+         transitive dependency. Azure Monitor integration added in Task 7.1 using
+         OpenTelemetry or the official Azure Monitor exporter. -->
     <!-- Testing -->
     <PackageVersion Include="xunit" Version="2.9.0" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.8.2" />
