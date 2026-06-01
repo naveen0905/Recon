@@ -99,14 +99,14 @@ Mark tasks `[x]` as completed. Update "Current Phase" in `.claude/context.md` af
   - Load connector from assembly/type name in config
   - Restrict plugin paths to `plugins/` directory (prevent path traversal)
   - Example plugin at `plugins/ExamplePlugin.cs`
-- [ ] 2.6 Implement normalizer (`ReconPlatform.Engine/Normalizer.cs`)
+- [x] 2.6 Implement normalizer (`ReconPlatform.Engine/Normalizer.cs`)
   - Map raw source dict → `CanonicalAsset` using source `mapping` config
   - JSONPath for nested fields; fill defaults for missing optional fields
-- [ ] 2.7 Implement diff engine (`ReconPlatform.Engine/DiffEngine.cs`)
+- [x] 2.7 Implement diff engine (`ReconPlatform.Engine/DiffEngine.cs`)
   - Compare Cosmos `current` with new pull
   - Produce `added_*`, `removed_*`, `changed_*` per field
   - Only update `last_changed` on meaningful diff
-- [ ] 2.8 Python agent scaffold (`agent/`)
+- [x] 2.8 Python agent scaffold (`agent/`)
   - FastAPI `/query` endpoint stub
   - Configurable LLM provider via `agent/config.yaml` (anthropic or azure_openai)
   - Tool stubs: `query_assets`, `get_asset_history`, `trigger_pull`, `get_stale_assets`
