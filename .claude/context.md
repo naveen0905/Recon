@@ -9,8 +9,8 @@
 ## Current State
 
 - **Current Phase:** 1
-- **Last Completed Task:** 1.3 — Config models (TeamConfig, SourceConfig, DeduplicationConfig)
-- **Next Task:** 1.4 — Config validator
+- **Last Completed Task:** 1.4 — Config validator (TeamConfigValidator, ValidationResult)
+- **Next Task:** 1.5 — Secret resolver
 
 ## Confirmed Architectural Decisions
 
@@ -45,7 +45,7 @@
 ## Known Implementation Notes
 
 - `IReadOnlyList<T>` / `IReadOnlyDictionary<K,V>` cannot be used on YAML-deserialized models — use `List<T>` / `Dictionary<K,V>` instead (YamlDotNet 13.7.1 cannot instantiate interface types)
-- `WithEnumNamingConvention` does NOT exist in YamlDotNet 13.7.1 — use `YamlEnumConverter` (custom `IYamlTypeConverter`) in `ReconPlatform.Config/YamlEnumConverter.cs` to handle `[YamlMember(Alias)]` on enums
+- `WithEnumNamingConvention` does NOT exist in YamlDotNet 13.7.1 — use `YamlEnumConverter` (custom `IYamlTypeConverter`) in `ReconPlatform.Config/YamlEnumConverter.cs`
 - `EnforceCodeStyleInBuild=true` removed from `Directory.Build.props` for scaffold phase — re-enable in Task 6.x
 
 ## How to Start Each Session
