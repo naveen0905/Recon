@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Data.SqlClient" />
-    <PackageReference Include="Microsoft.Azure.Kusto.Data" />
-    <PackageReference Include="Polly" />
-    <PackageReference Include="Microsoft.Extensions.Http.Resilience" />
-    <PackageReference Include="Newtonsoft.Json" />
-  </ItemGroup>
+  <!--
+    Packages added as connectors are implemented:
+      Task 2.1: Polly (retry policy)
+      Task 2.2: Microsoft.Extensions.Http.Resilience, Newtonsoft.Json (REST + JSONPath)
+      Task 2.3: Microsoft.Data.SqlClient (Azure SQL)
+      Task 2.4: Microsoft.Azure.Kusto.Data (ADX / KQL)
+  -->
   <ItemGroup>
     <ProjectReference Include="../ReconPlatform.Config/ReconPlatform.Config.csproj" />
     <ProjectReference Include="../ReconPlatform.Shared/ReconPlatform.Shared.csproj" />
