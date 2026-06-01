@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="Moq" />
+    <PackageReference Include="FluentAssertions" />
+    <PackageReference Include="coverlet.collector">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/ReconPlatform.Config/ReconPlatform.Config.csproj" />
+    <ProjectReference Include="../../src/ReconPlatform.Engine/ReconPlatform.Engine.csproj" />
+    <ProjectReference Include="../../src/ReconPlatform.Connectors/ReconPlatform.Connectors.csproj" />
+    <ProjectReference Include="../../src/ReconPlatform.Storage/ReconPlatform.Storage.csproj" />
+    <ProjectReference Include="../../src/ReconPlatform.Common/ReconPlatform.Common.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <PackageReference Include="YamlDotNet" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../ReconPlatform.Config/ReconPlatform.Config.csproj" />
+    <ProjectReference Include="../ReconPlatform.Common/ReconPlatform.Common.csproj" />
+  </ItemGroup>
+</Project>

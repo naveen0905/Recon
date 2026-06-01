@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <PackageReference Include="YamlDotNet" />
+    <!--
+      Azure.Security.KeyVault.Secrets and Azure.Identity added in Task 1.5
+      when SecretResolver is implemented.
+    -->
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../ReconPlatform.Common/ReconPlatform.Common.csproj" />
+  </ItemGroup>
+</Project>

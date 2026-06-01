@@ -1,0 +1,37 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Azure SDKs -->
+    <PackageVersion Include="Azure.Identity" Version="1.12.0" />
+    <PackageVersion Include="Azure.Security.KeyVault.Secrets" Version="4.6.0" />
+    <PackageVersion Include="Azure.Storage.Blobs" Version="12.20.0" />
+    <PackageVersion Include="Azure.Messaging.ServiceBus" Version="7.18.0" />
+    <PackageVersion Include="Microsoft.Azure.Cosmos" Version="3.39.0" />
+    <!-- Kusto version pinned when AzureAdxConnector is implemented in Task 2.4 -->
+    <PackageVersion Include="Microsoft.Azure.Kusto.Data" Version="11.3.0" />
+    <PackageVersion Include="Microsoft.Data.SqlClient" Version="5.2.1" />
+    <!-- Web / Auth -->
+    <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.6" />
+    <PackageVersion Include="Microsoft.Identity.Web" Version="3.1.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.6" />
+    <!-- Serialization -->
+    <PackageVersion Include="Newtonsoft.Json" Version="13.0.3" />
+    <!-- YamlDotNet: 13.7.1 is a confirmed stable release -->
+    <PackageVersion Include="YamlDotNet" Version="13.7.1" />
+    <!-- Resilience - versions pinned when connectors are implemented in Tasks 2.x -->
+    <PackageVersion Include="Polly" Version="8.4.0" />
+    <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="8.4.0" />
+    <!-- Logging -->
+    <PackageVersion Include="Serilog.AspNetCore" Version="8.0.1" />
+    <PackageVersion Include="Serilog.Sinks.Console" Version="6.0.0" />
+    <!-- Testing -->
+    <PackageVersion Include="xunit" Version="2.9.0" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.8.2" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
+    <PackageVersion Include="Moq" Version="4.20.70" />
+    <PackageVersion Include="FluentAssertions" Version="6.12.0" />
+    <PackageVersion Include="coverlet.collector" Version="6.0.2" />
+  </ItemGroup>
+</Project>

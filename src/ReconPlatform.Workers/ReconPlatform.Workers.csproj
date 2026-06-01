@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+  <ItemGroup>
+    <PackageReference Include="Serilog.AspNetCore" />
+    <PackageReference Include="Serilog.Sinks.Console" />
+    <!--
+      Azure.Messaging.ServiceBus added in Task 3.4 when ConnectorWorker is implemented.
+    -->
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../ReconPlatform.Config/ReconPlatform.Config.csproj" />
+    <ProjectReference Include="../ReconPlatform.Connectors/ReconPlatform.Connectors.csproj" />
+    <ProjectReference Include="../ReconPlatform.Storage/ReconPlatform.Storage.csproj" />
+    <ProjectReference Include="../ReconPlatform.Engine/ReconPlatform.Engine.csproj" />
+    <ProjectReference Include="../ReconPlatform.Skills/ReconPlatform.Skills.csproj" />
+    <ProjectReference Include="../ReconPlatform.Common/ReconPlatform.Common.csproj" />
+  </ItemGroup>
+</Project>

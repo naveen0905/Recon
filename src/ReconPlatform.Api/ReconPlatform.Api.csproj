@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <ItemGroup>
+    <PackageReference Include="Serilog.AspNetCore" />
+    <PackageReference Include="Serilog.Sinks.Console" />
+    <!--
+      Authentication packages added in Task 4.2:
+        Microsoft.AspNetCore.Authentication.JwtBearer
+        Microsoft.Identity.Web
+      Azure Monitor sink added in Task 7.1.
+    -->
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../ReconPlatform.Config/ReconPlatform.Config.csproj" />
+    <ProjectReference Include="../ReconPlatform.Connectors/ReconPlatform.Connectors.csproj" />
+    <ProjectReference Include="../ReconPlatform.Storage/ReconPlatform.Storage.csproj" />
+    <ProjectReference Include="../ReconPlatform.Engine/ReconPlatform.Engine.csproj" />
+    <ProjectReference Include="../ReconPlatform.Skills/ReconPlatform.Skills.csproj" />
+    <ProjectReference Include="../ReconPlatform.Common/ReconPlatform.Common.csproj" />
+  </ItemGroup>
+</Project>
