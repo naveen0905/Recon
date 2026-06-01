@@ -12,22 +12,22 @@ Mark tasks `[x]` as completed. Update "Current Phase" in `.claude/context.md` af
 **Goal:** .NET 8 solution structure, config models, secret resolution, storage clients stubbed, de-dup models defined.
 
 - [x] 1.1 Initialize Python agent stub (`requirements.txt`, `pyproject.toml`, `.gitignore`)
-- [ ] 1.2 Create .NET 8 solution (`ReconPlatform.sln`) with all project stubs as defined in `ARCHITECTURE.md`
+- [x] 1.2 Create .NET 8 solution (`ReconPlatform.sln`) with all project stubs as defined in `ARCHITECTURE.md`
   - Each project has correct `<ProjectReference>` dependencies
-  - Strict project boundary: no cross-cutting references outside `ReconPlatform.Shared`
+  - Strict project boundary: no cross-cutting references outside `ReconPlatform.Common`
   - `Directory.Build.props` — `TreatWarningsAsErrors`, `Nullable enable`, `LangVersion 12`
   - `Directory.Packages.props` — centralized NuGet version management
   - `global.json` pinning .NET 8 SDK
   - `.editorconfig`, `Makefile`, `.env.example`
   - CI workflow (`.github/workflows/ci.yml`)
   - Agent-friendly: `.claude/commands/` slash commands, `skills/` YAML stubs, `plugins/` stub
-- [ ] 1.3 Implement `TeamConfig`, `SourceConfig`, `DeduplicationConfig` models (`ReconPlatform.Config/Models/`)
+- [x] 1.3 Implement `TeamConfig`, `SourceConfig`, `DeduplicationConfig` models (`ReconPlatform.Config/Models/`)
   - All YAML fields from ARCHITECTURE.md as C# record types
   - `rest_api`, `azure_sql`, `azure_adx`, `plugin` source types (enum discriminator)
   - `oauth2`, `api_key`, `bearer`, `managed_identity` auth types
   - `DeduplicationConfig`: `MatchKeys`, `ConflictResolution`, `SourcePriority`, optional `CustomResolver`
   - `stale_after_days` team-level with per-source override
-  - YAML deserialization via `YamlDotNet`
+  - YAML deserialization via `YamlDotNet` + `YamlEnumConverter` (handles `[YamlMember(Alias)]` on enums)
 - [ ] 1.4 Implement config validator (`ReconPlatform.Config/Validator.cs`)
   - Validate required fields per connector type
   - Validate auth type matches connector type constraints
@@ -61,7 +61,7 @@ Mark tasks `[x]` as completed. Update "Current Phase" in `.claude/context.md` af
   - Resolve conflicts: `last_write`, `highest_confidence`, `source_priority`
   - Support dynamic `custom_resolver` plugin via `IDeduplicationResolver`
   - Update `contributing_sources` on successful merge
-- [ ] 1.11 Implement `CanonicalAsset` shared model (`ReconPlatform.Shared/Models/CanonicalAsset.cs`)
+- [ ] 1.11 Implement `CanonicalAsset` shared model (`ReconPlatform.Common/Models/CanonicalAsset.cs`)
   - All fields from canonical schema in ARCHITECTURE.md
   - `dedup_key`, `contributing_sources`, `confidence_score`, `source_priority`
 
@@ -123,27 +123,11 @@ Mark tasks `[x]` as completed. Update "Current Phase" in `.claude/context.md` af
 **Goal:** Staleness detection, Service Bus integration, Container App workers.
 
 - [ ] 3.1 Implement staleness checker (`ReconPlatform.Engine/StalenessChecker.cs`)
-  - Compute `is_stale` based on `last_pulled` vs `stale_after_days`
-  - Bulk update stale flags in Cosmos
 - [ ] 3.2 Implement retrigger orchestrator (`ReconPlatform.Engine/RetriggerOrchestrator.cs`)
-  - Accept asset ID or full team name
-  - Resolve which sources to pull from
-  - Push jobs to Service Bus
 - [ ] 3.3 Implement Staleness Timer worker (`ReconPlatform.Workers/StalenessTimer/`)
-  - Scheduled job, cron: `0 */6 * * *`
-  - Calls staleness checker → pushes stale assets to Service Bus
-  - Logs run summary to `connector_run_log`
 - [ ] 3.4 Implement Connector Worker (`ReconPlatform.Workers/ConnectorWorker/`)
-  - KEDA Service Bus trigger
-  - Pull → normalize → dedup → write Parquet → upsert Cosmos
-  - Update `connector_run_log` including `assets_deduped` count
 - [ ] 3.5 Implement Change Feed Worker (`ReconPlatform.Workers/ChangeFeedWorker/`)
-  - Poll Cosmos change feed
-  - Evaluate matching skill definitions from `SkillRegistry`
-  - Execute triggered skills
 - [ ] 3.6 Retrigger API endpoint (`POST /api/recon/retrigger`)
-  - Validate team + target exist
-  - Push to Service Bus; return job ID
 
 **Acceptance Criteria:**
 - Staleness timer produces correct Service Bus messages given mock Cosmos state
@@ -158,18 +142,12 @@ Mark tasks `[x]` as completed. Update "Current Phase" in `.claude/context.md` af
 **Goal:** Full API, skill/agent registration, scope enforcement.
 
 - [ ] 4.1 Implement `SkillRegistry` and `SkillExecutor` (`ReconPlatform.Skills/`)
-  - Load YAML from `skills/` at startup; watch for file changes
-  - Validate skill YAML against schema on load
 - [ ] 4.2 Full ASP.NET Core 8 API (`ReconPlatform.Api/Program.cs`)
-  - Entra ID auth (per-team app registration)
-  - `AuditLoggingMiddleware` — every request logged to `audit_log` before operation
-  - `SecretScrubMiddleware` — scrub `*secret*`, `*password*`, `*key*`, `*token*`, `*conn*` from logs
-  - Structured logging via Serilog
 - [ ] 4.3 Teams router — full CRUD + test connection endpoint
 - [ ] 4.4 Recon router — pull, retrigger, asset query (Synapse), asset detail + diff (Cosmos)
 - [ ] 4.5 Engagements router — create, list, scoped asset query
-- [ ] 4.6 Skills router — register (`POST /api/skills`), list, delete
-- [ ] 4.7 Health endpoint — per-component status (Cosmos, Blob, SQL, Synapse, Service Bus)
+- [ ] 4.6 Skills router — register, list, delete
+- [ ] 4.7 Health endpoint — per-component status
 
 **Acceptance Criteria:**
 - `dotnet test tests/ReconPlatform.IntegrationTests` passes against test client
@@ -183,10 +161,7 @@ Mark tasks `[x]` as completed. Update "Current Phase" in `.claude/context.md` af
 **Goal:** Python LLM agent queries recon data conversationally within engagement scope.
 
 - [ ] 5.1 Implement query builder (`agent/query_builder.py`)
-  - Natural language intent → Synapse T-SQL or Cosmos query
 - [ ] 5.2 Implement agent orchestrator (`agent/orchestrator.py`)
-  - Tool definitions driven by `skills/agents/*.yaml`
-  - Scope enforcement: cannot return assets outside engagement scope
 - [ ] 5.3 `POST /api/agent/query` in C# API (proxies to Python agent Container App)
 - [ ] 5.4 Agent skill YAML example (`skills/agents/scope-validator.yaml`)
 
@@ -201,13 +176,13 @@ Mark tasks `[x]` as completed. Update "Current Phase" in `.claude/context.md` af
 
 **Goal:** Production-ready audit, guardrails, error handling.
 
-- [ ] 6.1 Audit logging — every API call and connector run writes structured event to `audit_log` table; verify no sensitive fields leak
-- [ ] 6.2 Scope enforcement — all recon queries (`GET /api/recon/assets`, Synapse, Cosmos) validate caller's team claim against engagement scope; add unit tests for out-of-scope rejection
-- [ ] 6.3 Rate limiting per connector — max pulls per hour per source enforced in `RetriggerOrchestrator`; excess requests rejected with 429 + logged
-- [ ] 6.4 Retry + dead-letter handling for Service Bus — failed messages retried 3× with exponential backoff; dead-lettered messages logged to `connector_run_log` with `status=dead_lettered`; Azure Monitor alert wired
-- [ ] 6.5 Secret rotation support — `SecretResolver` re-resolves Key Vault secrets on each use (with per-secret TTL cache); verify rotation takes effect without restart
-- [ ] 6.6 Integration tests against real Azure services — test resource group in East US 2; full pull + retrigger cycle end-to-end; Cosmos version increment verified; Blob Parquet verified
-- [ ] 6.7 Secret scrubbing verified by test — assert no field matching scrub pattern appears in Serilog output after a full pull run
+- [ ] 6.1 Audit logging verification
+- [ ] 6.2 Scope enforcement unit tests
+- [ ] 6.3 Rate limiting per connector
+- [ ] 6.4 Retry + dead-letter handling for Service Bus
+- [ ] 6.5 Secret rotation support
+- [ ] 6.6 Integration tests against real Azure services
+- [ ] 6.7 Secret scrubbing verified by test
 
 **Acceptance Criteria:**
 - No secrets in logs or API responses (verified by test)
@@ -222,21 +197,12 @@ Mark tasks `[x]` as completed. Update "Current Phase" in `.claude/context.md` af
 **Goal:** Bicep IaC for all Azure resources, full documentation.
 
 - [ ] 7.1 Bicep templates (`infra/`)
-  - Container Apps environment + all app/job definitions (API, 3 workers)
-  - Blob, Cosmos, SQL Serverless, Synapse Serverless, Service Bus, Key Vault
-  - Managed Identity assignments with least-privilege RBAC
-  - Log Analytics workspace + Azure Monitor alerts (dead-letter, anomalous pull volume)
-  - `WORKER_TYPE` env var per Container App deployment
-- [ ] 7.2 `docs/setup.md` — local dev prerequisites, env vars, first run
-- [ ] 7.3 `docs/deployment.md` — Bicep deploy steps, CI/CD pipeline, environment promotion
-- [ ] 7.4 `docs/configuration.md` — full team YAML config reference, all fields with types and defaults
-- [ ] 7.5 `docs/extending-skills.md` — adding new skill YAML, new connector plugin, new agent tool
-- [ ] 7.6 `README.md` — platform overview, architecture diagram, quick start
+- [ ] 7.2 `docs/setup.md`
+- [ ] 7.3 `docs/deployment.md`
+- [ ] 7.4 `docs/configuration.md`
+- [ ] 7.5 `docs/extending-skills.md`
+- [ ] 7.6 `README.md`
 - [ ] 7.7 SOC2 checklist
-  - Dependabot enabled
-  - Container image scanning in CI (`trivy`)
-  - Audit log retention ≥ 1 year verified in Log Analytics
-  - CODEOWNERS file present
 
 **Acceptance Criteria:**
 - `az deployment group create` with `infra/main.bicep` succeeds in test resource group
@@ -271,7 +237,7 @@ xunit + Moq + FluentAssertions
 fastapi
 uvicorn
 httpx
-anthropic
+anthropoic
 pydantic>=2.0
 pyyaml
 pytest

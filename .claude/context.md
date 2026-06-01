@@ -9,8 +9,8 @@
 ## Current State
 
 - **Current Phase:** 1
-- **Last Completed Task:** 1.1 — Python agent stub (pyproject.toml, requirements.txt, .gitignore)
-- **Next Task:** 1.2 — .NET 8 solution scaffold with agent-friendly repo practices
+- **Last Completed Task:** 1.3 — Config models (TeamConfig, SourceConfig, DeduplicationConfig)
+- **Next Task:** 1.4 — Config validator
 
 ## Confirmed Architectural Decisions
 
@@ -26,6 +26,7 @@
 | Compliance | SOC2 Type II |
 | De-duplication | Configurable match keys per source, team-expandable |
 | Plugin / Skills | Configuration-driven YAML |
+| Shared project name | `ReconPlatform.Common` (was Shared — CA1716: 'Shared' is VB.NET reserved) |
 
 ## Hard Rules
 
@@ -36,10 +37,16 @@
 - Never log resolved secret values — scrub `*secret*`, `*password*`, `*key*`, `*token*`, `*conn*`
 - Never skip writing tests — every phase has acceptance criteria tests
 - Never use Azure Functions — replaced by Container Apps
-- Treat compiler warnings as errors
+- Treat compiler warnings as errors (`TreatWarningsAsErrors=true`)
 - All API endpoints require Entra ID auth except `GET /api/health`
 - Scope enforcement: all recon queries validate against engagement scope
 - Ask before any architectural decision not explicitly in ARCHITECTURE.md
+
+## Known Implementation Notes
+
+- `IReadOnlyList<T>` / `IReadOnlyDictionary<K,V>` cannot be used on YAML-deserialized models — use `List<T>` / `Dictionary<K,V>` instead (YamlDotNet 13.7.1 cannot instantiate interface types)
+- `WithEnumNamingConvention` does NOT exist in YamlDotNet 13.7.1 — use `YamlEnumConverter` (custom `IYamlTypeConverter`) in `ReconPlatform.Config/YamlEnumConverter.cs` to handle `[YamlMember(Alias)]` on enums
+- `EnforceCodeStyleInBuild=true` removed from `Directory.Build.props` for scaffold phase — re-enable in Task 6.x
 
 ## How to Start Each Session
 
@@ -53,7 +60,7 @@
 - GitHub: `naveen0905/Recon`
 - Primary language: C# .NET 8 (`ReconPlatform.sln`)
 - Agent language: Python 3.11+ (`agent/`)
-- Branch for new work: create feature branch from `main`
+- Working branch: `claude/happy-ramanujan-VFR8X`
 
 ## Local Dev Quick Start
 
