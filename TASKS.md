@@ -28,40 +28,40 @@ Mark tasks `[x]` as completed. Update "Current Phase" in `.claude/context.md` af
   - `DeduplicationConfig`: `MatchKeys`, `ConflictResolution`, `SourcePriority`, optional `CustomResolver`
   - `stale_after_days` team-level with per-source override
   - YAML deserialization via `YamlDotNet` + `YamlEnumConverter` (handles `[YamlMember(Alias)]` on enums)
-- [ ] 1.4 Implement config validator (`ReconPlatform.Config/Validator.cs`)
+- [x] 1.4 Implement config validator (`ReconPlatform.Config/Validator.cs`)
   - Validate required fields per connector type
   - Validate auth type matches connector type constraints
   - Validate `dedup.match_keys` reference valid fields for the asset type
   - Return structured `ValidationResult` with per-field errors
-- [ ] 1.5 Implement secret resolver (`ReconPlatform.Config/SecretResolver.cs`)
+- [x] 1.5 Implement secret resolver (`ReconPlatform.Config/SecretResolver.cs`)
   - Resolve `{{secret:KEY_NAME}}` patterns from Azure Key Vault
   - Fall back to environment variables for local dev (guarded by `IsDevelopment()`)
   - Never log resolved secret values (SOC2)
   - Support secret rotation: re-resolve without restart
-- [ ] 1.6 Implement Blob Storage client (`ReconPlatform.Storage/BlobStorageClient.cs`)
+- [x] 1.6 Implement Blob Storage client (`ReconPlatform.Storage/BlobStorageClient.cs`)
   - Write Parquet to `{team}/{source}/{year}/{month}/{day}/pull_{timestamp}.parquet`
   - List pulls for a given team/source/date range
   - `Azure.Storage.Blobs` SDK; managed identity preferred
-- [ ] 1.7 Implement Cosmos DB client (`ReconPlatform.Storage/CosmosDbClient.cs`)
+- [x] 1.7 Implement Cosmos DB client (`ReconPlatform.Storage/CosmosDbClient.cs`)
   - Upsert asset document with version increment
   - Run `DeduplicationEngine` before upsert to resolve conflicts
   - Compute and store diff between current and previous version
   - Query stale assets; mark `retrigger_scheduled=true`
   - `Microsoft.Azure.Cosmos` SDK
-- [ ] 1.8 Implement Azure SQL client (`ReconPlatform.Storage/SqlMetadataClient.cs`)
+- [x] 1.8 Implement Azure SQL client (`ReconPlatform.Storage/SqlMetadataClient.cs`)
   - CRUD for `team_configs`, `connector_run_log`, `engagements`, `user_permissions`, `audit_log`
   - `Microsoft.Data.SqlClient` with managed identity
   - All writes append to `audit_log` (SOC2)
-- [ ] 1.9 Implement Synapse Serverless SQL client (`ReconPlatform.Storage/SynapseClient.cs`)
+- [x] 1.9 Implement Synapse Serverless SQL client (`ReconPlatform.Storage/SynapseClient.cs`)
   - Execute T-SQL against external Parquet tables in Blob
   - Return `IEnumerable<Dictionary<string, object>>`
   - `Microsoft.Data.SqlClient` with Synapse serverless endpoint
-- [ ] 1.10 Implement `DeduplicationEngine` (`ReconPlatform.Engine/DeduplicationEngine.cs`)
+- [x] 1.10 Implement `DeduplicationEngine` (`ReconPlatform.Engine/DeduplicationEngine.cs`)
   - Compute `dedup_key` from configured `match_keys`
   - Resolve conflicts: `last_write`, `highest_confidence`, `source_priority`
   - Support dynamic `custom_resolver` plugin via `IDeduplicationResolver`
   - Update `contributing_sources` on successful merge
-- [ ] 1.11 Implement `CanonicalAsset` shared model (`ReconPlatform.Common/Models/CanonicalAsset.cs`)
+- [x] 1.11 Implement `CanonicalAsset` shared model (`ReconPlatform.Common/Models/CanonicalAsset.cs`)
   - All fields from canonical schema in ARCHITECTURE.md
   - `dedup_key`, `contributing_sources`, `confidence_score`, `source_priority`
 
