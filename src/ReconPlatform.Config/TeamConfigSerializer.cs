@@ -4,14 +4,11 @@ using YamlDotNet.Serialization.NamingConventions;
 
 namespace ReconPlatform.Config;
 
-/// <summary>
-/// Deserializes team YAML config into <see cref="TeamConfig"/>.
-/// Secret placeholders ({{secret:X}}) are preserved as-is and resolved later by SecretResolver.
-/// </summary>
 public static class TeamConfigSerializer
 {
     private static readonly IDeserializer Deserializer = new DeserializerBuilder()
         .WithNamingConvention(UnderscoredNamingConvention.Instance)
+        .WithTypeConverter(YamlEnumConverter.Instance)
         .IgnoreUnmatchedProperties()
         .Build();
 
@@ -26,6 +23,7 @@ public static class TeamConfigSerializer
         ArgumentNullException.ThrowIfNull(config);
         var serializer = new SerializerBuilder()
             .WithNamingConvention(UnderscoredNamingConvention.Instance)
+            .WithTypeConverter(YamlEnumConverter.Instance)
             .Build();
         return serializer.Serialize(config);
     }
