@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.Cosmos" />
+    <PackageReference Include="Azure.Storage.Blobs" />
+    <PackageReference Include="Microsoft.Data.SqlClient" />
+    <PackageReference Include="Azure.Identity" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../ReconPlatform.Config/ReconPlatform.Config.csproj" />
+    <ProjectReference Include="../ReconPlatform.Shared/ReconPlatform.Shared.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <PackageReference Include="Microsoft.Identity.Web" />
+    <PackageReference Include="Serilog.AspNetCore" />
+    <PackageReference Include="Serilog.Sinks.Console" />
+    <PackageReference Include="Serilog.Sinks.AzureAnalytics" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../ReconPlatform.Config/ReconPlatform.Config.csproj" />
+    <ProjectReference Include="../ReconPlatform.Connectors/ReconPlatform.Connectors.csproj" />
+    <ProjectReference Include="../ReconPlatform.Storage/ReconPlatform.Storage.csproj" />
+    <ProjectReference Include="../ReconPlatform.Engine/ReconPlatform.Engine.csproj" />
+    <ProjectReference Include="../ReconPlatform.Skills/ReconPlatform.Skills.csproj" />
+    <ProjectReference Include="../ReconPlatform.Shared/ReconPlatform.Shared.csproj" />
+  </ItemGroup>
+</Project>

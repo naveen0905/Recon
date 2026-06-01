@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" />
+    <PackageReference Include="Microsoft.Azure.Kusto.Data" />
+    <PackageReference Include="Polly" />
+    <PackageReference Include="Microsoft.Extensions.Http.Resilience" />
+    <PackageReference Include="Newtonsoft.Json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../ReconPlatform.Config/ReconPlatform.Config.csproj" />
+    <ProjectReference Include="../ReconPlatform.Shared/ReconPlatform.Shared.csproj" />
+  </ItemGroup>
+</Project>
