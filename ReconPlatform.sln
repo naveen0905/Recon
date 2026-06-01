@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A0000001-000
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A0000002-0000-0000-0000-000000000000}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReconPlatform.Shared", "src/ReconPlatform.Shared/ReconPlatform.Shared.csproj", "{B0000001-0000-0000-0000-000000000000}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReconPlatform.Common", "src/ReconPlatform.Common/ReconPlatform.Common.csproj", "{B0000001-0000-0000-0000-000000000000}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReconPlatform.Config", "src/ReconPlatform.Config/ReconPlatform.Config.csproj", "{B0000002-0000-0000-0000-000000000000}"
 EndProject

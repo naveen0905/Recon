@@ -7,6 +7,6 @@
     -->
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="../ReconPlatform.Shared/ReconPlatform.Shared.csproj" />
+    <ProjectReference Include="../ReconPlatform.Common/ReconPlatform.Common.csproj" />
   </ItemGroup>
 </Project>

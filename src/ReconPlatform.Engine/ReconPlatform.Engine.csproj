@@ -5,6 +5,6 @@
   <ItemGroup>
     <ProjectReference Include="../ReconPlatform.Config/ReconPlatform.Config.csproj" />
     <ProjectReference Include="../ReconPlatform.Storage/ReconPlatform.Storage.csproj" />
-    <ProjectReference Include="../ReconPlatform.Shared/ReconPlatform.Shared.csproj" />
+    <ProjectReference Include="../ReconPlatform.Common/ReconPlatform.Common.csproj" />
   </ItemGroup>
 </Project>

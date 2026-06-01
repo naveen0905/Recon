@@ -1,5 +1,5 @@
 using ReconPlatform.Config.Models;
-using ReconPlatform.Shared.Models;
+using ReconPlatform.Common.Models;
 
 namespace ReconPlatform.Engine;
 

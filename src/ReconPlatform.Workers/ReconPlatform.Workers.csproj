@@ -12,6 +12,6 @@
     <ProjectReference Include="../ReconPlatform.Storage/ReconPlatform.Storage.csproj" />
     <ProjectReference Include="../ReconPlatform.Engine/ReconPlatform.Engine.csproj" />
     <ProjectReference Include="../ReconPlatform.Skills/ReconPlatform.Skills.csproj" />
-    <ProjectReference Include="../ReconPlatform.Shared/ReconPlatform.Shared.csproj" />
+    <ProjectReference Include="../ReconPlatform.Common/ReconPlatform.Common.csproj" />
   </ItemGroup>
 </Project>

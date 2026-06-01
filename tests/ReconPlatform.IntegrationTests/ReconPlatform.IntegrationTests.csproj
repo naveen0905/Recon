@@ -17,6 +17,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../../src/ReconPlatform.Api/ReconPlatform.Api.csproj" />
-    <ProjectReference Include="../../src/ReconPlatform.Shared/ReconPlatform.Shared.csproj" />
+    <ProjectReference Include="../../src/ReconPlatform.Common/ReconPlatform.Common.csproj" />
   </ItemGroup>
 </Project>

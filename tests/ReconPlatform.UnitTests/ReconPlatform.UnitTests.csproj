@@ -18,6 +18,6 @@
     <ProjectReference Include="../../src/ReconPlatform.Engine/ReconPlatform.Engine.csproj" />
     <ProjectReference Include="../../src/ReconPlatform.Connectors/ReconPlatform.Connectors.csproj" />
     <ProjectReference Include="../../src/ReconPlatform.Storage/ReconPlatform.Storage.csproj" />
-    <ProjectReference Include="../../src/ReconPlatform.Shared/ReconPlatform.Shared.csproj" />
+    <ProjectReference Include="../../src/ReconPlatform.Common/ReconPlatform.Common.csproj" />
   </ItemGroup>
 </Project>
