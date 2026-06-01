@@ -1,10 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Azure.Cosmos" />
-    <PackageReference Include="Azure.Storage.Blobs" />
-    <PackageReference Include="Microsoft.Data.SqlClient" />
-    <PackageReference Include="Azure.Identity" />
-  </ItemGroup>
+  <!--
+    Azure SDK packages added as storage clients are implemented:
+      Task 1.6: Azure.Storage.Blobs, Azure.Identity
+      Task 1.7: Microsoft.Azure.Cosmos
+      Task 1.8: Microsoft.Data.SqlClient
+      Task 1.9: Microsoft.Data.SqlClient (Synapse reuses same driver)
+  -->
   <ItemGroup>
     <ProjectReference Include="../ReconPlatform.Config/ReconPlatform.Config.csproj" />
     <ProjectReference Include="../ReconPlatform.Shared/ReconPlatform.Shared.csproj" />

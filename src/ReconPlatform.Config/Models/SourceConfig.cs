@@ -1,10 +1,19 @@
+using YamlDotNet.Serialization;
+
 namespace ReconPlatform.Config.Models;
 
 public enum SourceType
 {
+    [YamlMember(Alias = "rest_api")]
     RestApi,
+
+    [YamlMember(Alias = "azure_sql")]
     AzureSql,
+
+    [YamlMember(Alias = "azure_adx")]
     AzureAdx,
+
+    [YamlMember(Alias = "plugin")]
     Plugin,
 }
 
@@ -25,13 +34,12 @@ public sealed record SourceConfig
     public string? ConnectionString { get; init; }   // {{secret:...}} resolved at runtime
     public string? Query { get; init; }
 
-    // --- Azure ADX ---
+    // --- Azure ADX (Query shared with AzureSql above) ---
     public string? Cluster { get; init; }
     public string? Database { get; init; }
-    // Query shared with AzureSql above
 
     // --- Plugin ---
-    /// <summary>Fully-qualified type name, e.g. "plugins.MyConnector". Must be in plugins/ dir.</summary>
+    /// <summary>Fully-qualified type name. Must be in plugins/ directory.</summary>
     public string? PluginClass { get; init; }
     public IReadOnlyDictionary<string, string> Config { get; init; }
         = new Dictionary<string, string>();

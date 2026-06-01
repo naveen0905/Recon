@@ -1,10 +1,19 @@
+using YamlDotNet.Serialization;
+
 namespace ReconPlatform.Config.Models;
 
 public enum AuthType
 {
+    [YamlMember(Alias = "oauth2")]
     OAuth2,
+
+    [YamlMember(Alias = "api_key")]
     ApiKey,
+
+    [YamlMember(Alias = "bearer")]
     Bearer,
+
+    [YamlMember(Alias = "managed_identity")]
     ManagedIdentity,
 }
 
