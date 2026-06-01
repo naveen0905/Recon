@@ -7,6 +7,13 @@
       Task 1.9: Microsoft.Data.SqlClient (Synapse reuses same driver)
   -->
   <ItemGroup>
+    <PackageReference Include="Azure.Storage.Blobs" />
+    <PackageReference Include="Azure.Identity" />
+    <PackageReference Include="Microsoft.Azure.Cosmos" />
+    <PackageReference Include="Microsoft.Data.SqlClient" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="../ReconPlatform.Config/ReconPlatform.Config.csproj" />
     <ProjectReference Include="../ReconPlatform.Common/ReconPlatform.Common.csproj" />
   </ItemGroup>
