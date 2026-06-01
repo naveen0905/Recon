@@ -1,0 +1,8 @@
+# Default owners for all files
+* @naveen0905
+
+# Architecture decisions require explicit review
+ARCHITECTURE.md @naveen0905
+CLAUDE.md @naveen0905
+.claude/ @naveen0905
+infra/ @naveen0905

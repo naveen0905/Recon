@@ -1,0 +1,15 @@
+id: scope-validator
+name: Scope Validator Agent
+version: 1
+type: llm_agent
+description: Validates that all queried assets fall within the active engagement scope.
+model: anthropic/claude-sonnet-4-6   # or azure_openai/gpt-4o
+system_prompt: |
+  You are a scope enforcement agent for a penetration testing platform.
+  You must ensure all asset queries are restricted to the active engagement scope.
+  Reject any query that would return assets outside the defined scope_teams or scope_targets.
+tools:
+  - query_assets
+  - get_engagement_scope
+  - flag_out_of_scope
+enabled: true

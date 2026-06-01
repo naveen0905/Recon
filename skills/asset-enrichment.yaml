@@ -1,0 +1,16 @@
+id: asset-enrichment
+name: Asset Enrichment
+version: 1
+description: When a new high/critical host is seen, retrigger all sources for that asset.
+trigger:
+  type: on_new_asset
+  filter:
+    asset_type: host
+    severity: [high, critical]
+actions:
+  - type: retrigger_sources
+    scope: all_sources_for_asset
+  - type: notify
+    channel: service_bus
+    queue: enrichment-alerts
+enabled: true
