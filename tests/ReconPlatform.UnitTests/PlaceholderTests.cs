@@ -2,7 +2,7 @@ using Xunit;
 
 namespace ReconPlatform.UnitTests;
 
-// Placeholder — replaced by real tests as tasks 1.3+ are implemented
+// Kept as a safety net — real tests added per-phase in subdirectories
 public class PlaceholderTests
 {
     [Fact]

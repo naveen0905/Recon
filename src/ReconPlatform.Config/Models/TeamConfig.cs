@@ -1,26 +1,39 @@
 namespace ReconPlatform.Config.Models;
 
-// Stub — full implementation in Task 1.3
 public sealed record TeamConfig
 {
     public string Team { get; init; } = string.Empty;
+
+    /// <summary>Default staleness threshold for all sources in this team.</summary>
     public int StaleAfterDays { get; init; } = 7;
-    public DeduplicationConfig Dedup { get; init; } = new();
+
+    /// <summary>Azure Entra ID app registration for this team.</summary>
+    public TeamAuthConfig? Auth { get; init; }
+
+    /// <summary>Team-level dedup defaults; overridden per source.</summary>
+    public TeamDeduplicationConfig Dedup { get; init; } = new();
+
     public IReadOnlyList<SourceConfig> Sources { get; init; } = [];
 }
 
-public sealed record SourceConfig
+/// <summary>Entra ID identity for this team's app registration.</summary>
+public sealed record TeamAuthConfig
 {
-    public string Id { get; init; } = string.Empty;
-    public string Type { get; init; } = string.Empty;
-    public int? StaleAfterDays { get; init; }
-    public DeduplicationConfig Dedup { get; init; } = new();
+    /// <summary>{{secret:KEY_NAME}} resolved from Key Vault at runtime.</summary>
+    public string EntraAppId { get; init; } = string.Empty;
+
+    /// <summary>{{secret:KEY_NAME}} resolved from Key Vault at runtime.</summary>
+    public string TenantId { get; init; } = string.Empty;
 }
 
-public sealed record DeduplicationConfig
+/// <summary>Team-level dedup settings (source-level settings override these).</summary>
+public sealed record TeamDeduplicationConfig
 {
-    public IReadOnlyList<string> MatchKeys { get; init; } = [];
-    public string ConflictResolution { get; init; } = "last_write";
-    public int SourcePriority { get; init; } = 100;
+    public ConflictResolution DefaultConflictResolution { get; init; } = ConflictResolution.LastWrite;
+
+    /// <summary>
+    /// Optional fully-qualified type name for a team-wide custom dedup resolver.
+    /// Must implement IDeduplicationResolver and be in the plugins/ directory.
+    /// </summary>
     public string? CustomResolver { get; init; }
 }
