@@ -8,9 +8,9 @@
 
 ## Current State
 
-- **Current Phase:** 2
-- **Last Completed Task:** 1.11 — Phase 1 complete (all storage clients, dedup engine, canonical asset)
-- **Next Task:** 2.1 — IConnector interface
+- **Current Phase:** 3
+- **Last Completed Task:** 2.8 — Phase 2 complete (all connectors, normalizer, diff engine, Python agent scaffold)
+- **Next Task:** 3.1 — StalenessChecker
 
 ## Confirmed Architectural Decisions
 

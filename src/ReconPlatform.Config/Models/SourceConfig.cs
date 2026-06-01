@@ -42,6 +42,7 @@ public sealed record SourceConfig
 
     public FieldMapping? Mapping { get; init; }
     public DeduplicationConfig Dedup { get; init; } = new();
+    public SourceCatalog? Catalog { get; init; }
 }
 
 public sealed record PaginationConfig

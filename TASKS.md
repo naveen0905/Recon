@@ -80,22 +80,22 @@ Mark tasks `[x]` as completed. Update "Current Phase" in `.claude/context.md` af
 
 **Goal:** Pluggable connector system. All three connector types working. De-dup applied end-to-end.
 
-- [ ] 2.1 Define `IConnector` interface (`ReconPlatform.Connectors/Interfaces/IConnector.cs`)
+- [x] 2.1 Define `IConnector` interface (`ReconPlatform.Connectors/Interfaces/IConnector.cs`)
   - `Task<IEnumerable<Dictionary<string, object>>> PullAsync(SourceConfig config, CancellationToken ct)`
   - `Task<bool> TestConnectionAsync(SourceConfig config, CancellationToken ct)`
   - Shared retry policy via Polly (3 attempts, exponential backoff)
-- [ ] 2.2 Implement `RestApiConnector` (`ReconPlatform.Connectors/RestApiConnector.cs`)
+- [x] 2.2 Implement `RestApiConnector` (`ReconPlatform.Connectors/RestApiConnector.cs`)
   - OAuth2 client credentials, API key (header/query), Bearer token
   - JSONPath field extraction
   - Pagination: cursor and offset patterns
   - `IHttpClientFactory` (never `new HttpClient()`)
-- [ ] 2.3 Implement `AzureSqlConnector` (`ReconPlatform.Connectors/AzureSqlConnector.cs`)
+- [x] 2.3 Implement `AzureSqlConnector` (`ReconPlatform.Connectors/AzureSqlConnector.cs`)
   - Execute configured SQL query; managed identity + connection string auth
   - Parameterized queries only — no string interpolation
-- [ ] 2.4 Implement `AzureAdxConnector` (`ReconPlatform.Connectors/AzureAdxConnector.cs`)
+- [x] 2.4 Implement `AzureAdxConnector` (`ReconPlatform.Connectors/AzureAdxConnector.cs`)
   - Execute KQL query; managed identity auth
   - `Microsoft.Azure.Kusto.Data` SDK
-- [ ] 2.5 Implement plugin loader (`ReconPlatform.Connectors/PluginLoader.cs`)
+- [x] 2.5 Implement plugin loader (`ReconPlatform.Connectors/PluginLoader.cs`)
   - Load connector from assembly/type name in config
   - Restrict plugin paths to `plugins/` directory (prevent path traversal)
   - Example plugin at `plugins/ExamplePlugin.cs`
