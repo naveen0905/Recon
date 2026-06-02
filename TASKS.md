@@ -196,13 +196,13 @@ Mark tasks `[x]` as completed. Update "Current Phase" in `.claude/context.md` af
 
 **Goal:** Bicep IaC for all Azure resources, full documentation.
 
-- [ ] 7.1 Bicep templates (`infra/`)
-- [ ] 7.2 `docs/setup.md`
-- [ ] 7.3 `docs/deployment.md`
-- [ ] 7.4 `docs/configuration.md`
-- [ ] 7.5 `docs/extending-skills.md`
-- [ ] 7.6 `README.md`
-- [ ] 7.7 SOC2 checklist
+- [x] 7.1 Bicep templates (`infra/`)
+- [x] 7.2 `docs/setup.md`
+- [x] 7.3 `docs/deployment.md`
+- [x] 7.4 `docs/configuration.md`
+- [x] 7.5 `docs/extending-skills.md`
+- [x] 7.6 `README.md`
+- [x] 7.7 SOC2 checklist
 
 **Acceptance Criteria:**
 - `az deployment group create` with `infra/main.bicep` succeeds in test resource group
