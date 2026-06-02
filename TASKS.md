@@ -141,13 +141,13 @@ Mark tasks `[x]` as completed. Update "Current Phase" in `.claude/context.md` af
 
 **Goal:** Full API, skill/agent registration, scope enforcement.
 
-- [ ] 4.1 Implement `SkillRegistry` and `SkillExecutor` (`ReconPlatform.Skills/`)
-- [ ] 4.2 Full ASP.NET Core 8 API (`ReconPlatform.Api/Program.cs`)
-- [ ] 4.3 Teams router — full CRUD + test connection endpoint
-- [ ] 4.4 Recon router — pull, retrigger, asset query (Synapse), asset detail + diff (Cosmos)
-- [ ] 4.5 Engagements router — create, list, scoped asset query
-- [ ] 4.6 Skills router — register, list, delete
-- [ ] 4.7 Health endpoint — per-component status
+- [x] 4.1 Implement `SkillRegistry` and `SkillExecutor` (`ReconPlatform.Skills/`)
+- [x] 4.2 Full ASP.NET Core 8 API (`ReconPlatform.Api/Program.cs`)
+- [x] 4.3 Teams router — full CRUD + test connection endpoint
+- [x] 4.4 Recon router — pull, retrigger, asset query (Synapse), asset detail + diff (Cosmos)
+- [x] 4.5 Engagements router — create, list, scoped asset query
+- [x] 4.6 Skills router — register, list, delete
+- [x] 4.7 Health endpoint — per-component status
 
 **Acceptance Criteria:**
 - `dotnet test tests/ReconPlatform.IntegrationTests` passes against test client
