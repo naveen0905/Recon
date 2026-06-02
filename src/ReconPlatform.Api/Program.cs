@@ -3,6 +3,7 @@ using Azure.Identity;
 using Azure.Messaging.ServiceBus;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using ReconPlatform.Api.Logging;
 using ReconPlatform.Api.Middleware;
 using ReconPlatform.Config;
 using ReconPlatform.Connectors;
@@ -16,6 +17,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseSerilog((ctx, cfg) =>
     cfg.ReadFrom.Configuration(ctx.Configuration)
+       .Destructure.With<SecretScrubbingPolicy>()
        .WriteTo.Console());
 
 builder.Services.AddControllers();

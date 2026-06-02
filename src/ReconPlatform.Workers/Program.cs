@@ -18,6 +18,7 @@ switch (workerType)
 {
     case "connector-worker":
         builder.Services.AddHostedService<ConnectorWorkerService>();
+        builder.Services.AddHostedService<DeadLetterMonitor>();
         break;
     case "staleness-timer":
         builder.Services.AddHostedService<StalenessTimerService>();

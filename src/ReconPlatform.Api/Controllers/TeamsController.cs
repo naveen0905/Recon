@@ -18,16 +18,19 @@ public sealed class TeamsController : ControllerBase
 
     private readonly SqlMetadataClient _sqlClient;
     private readonly IEnumerable<IConnector> _connectors;
+    private readonly SecretResolver _secretResolver;
     private readonly ILogger<TeamsController> _logger;
 
     public TeamsController(
         SqlMetadataClient sqlClient,
         IEnumerable<IConnector> connectors,
+        SecretResolver secretResolver,
         ILogger<TeamsController> logger)
     {
-        _sqlClient  = sqlClient;
-        _connectors = connectors;
-        _logger     = logger;
+        _sqlClient      = sqlClient;
+        _connectors     = connectors;
+        _secretResolver = secretResolver;
+        _logger         = logger;
     }
 
     // ── GET /api/teams/{team}/sources ─────────────────────────────────────────
@@ -188,6 +191,31 @@ public sealed class TeamsController : ControllerBase
             sourceId,
             testedAt = DateTimeOffset.UtcNow,
         });
+    }
+
+    // ── POST /api/teams/{team}/secrets/rotate ─────────────────────────────────
+
+    /// <summary>
+    /// Triggers team-scoped secret cache invalidation so the next access re-fetches
+    /// secrets from Azure Key Vault without a process restart.
+    /// </summary>
+    [HttpPost("secrets/rotate")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public IActionResult RotateSecretsAsync(string team)
+    {
+        var enforce = EnforceTeamClaim(team);
+        if (enforce is not null) return enforce;
+
+        // Invalidate all cached secrets whose key starts with the team prefix.
+        // Connectors and other callers will re-fetch from Key Vault on next access.
+        _secretResolver.InvalidateCacheForPrefix(team);
+
+        _logger.LogInformation(
+            "Secret cache invalidated for team={Team} by actor={Actor}",
+            team, User.Identity?.Name ?? "anonymous");
+
+        return NoContent();
     }
 
     // ── helpers ───────────────────────────────────────────────────────────────
