@@ -83,6 +83,21 @@ public sealed class SecretResolver
     /// <summary>Evict all cached secrets.</summary>
     public void InvalidateAllCache() => _cache.Clear();
 
+    /// <summary>
+    /// Evict all cached secrets whose key starts with <paramref name="prefix"/>.
+    /// Supports team-scoped rotation (e.g., prefix = "team-a-").
+    /// </summary>
+    public void InvalidateCacheForPrefix(string prefix)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(prefix);
+
+        foreach (var key in _cache.Keys)
+        {
+            if (key.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
+                _cache.TryRemove(key, out _);
+        }
+    }
+
     private async Task<string> FetchSecretAsync(string keyName, CancellationToken ct)
     {
         // In dev mode, check environment variables first.

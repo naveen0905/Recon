@@ -40,6 +40,9 @@ public sealed record SourceConfig
     public string? PluginClass { get; init; }
     public Dictionary<string, string> Config { get; init; } = [];
 
+    [YamlMember(Alias = "rate_limit_per_minute")]
+    public int RateLimitPerMinute { get; init; } = 60;
+
     public FieldMapping? Mapping { get; init; }
     public DeduplicationConfig Dedup { get; init; } = new();
     public SourceCatalog? Catalog { get; init; }

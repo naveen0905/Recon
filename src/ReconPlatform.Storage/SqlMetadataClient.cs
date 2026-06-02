@@ -225,6 +225,37 @@ public sealed class SqlMetadataClient : IAsyncDisposable
 
     // ── audit_log (SOC2) ──────────────────────────────────────────────────────
 
+    /// <summary>
+    /// Records a dead-lettered Service Bus message in the audit log.
+    /// The message body is NOT recorded (SOC2).
+    /// </summary>
+    public async Task WriteDeadLetterAuditAsync(
+        string messageId,
+        string deadLetterReason,
+        string deadLetterErrorDescription,
+        DateTimeOffset enqueuedTime,
+        CancellationToken ct = default)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(messageId);
+
+        await using var conn = await OpenAsync(ct).ConfigureAwait(false);
+        await using var cmd = conn.CreateCommand();
+        cmd.CommandText = """
+            INSERT INTO audit_log (actor, resource, resource_id, action, occurred_at)
+            VALUES (@actor, @resource, @resource_id, @action, SYSUTCDATETIME())
+            """;
+        cmd.Parameters.AddWithValue("@actor", "service-bus");
+        cmd.Parameters.AddWithValue("@resource", "connector_queue");
+        cmd.Parameters.AddWithValue("@resource_id", messageId);
+        cmd.Parameters.AddWithValue("@action", "dead_letter_received");
+
+        await cmd.ExecuteNonQueryAsync(ct).ConfigureAwait(false);
+
+        _logger.LogInformation(
+            "Dead-letter audit written: messageId={MessageId} reason={Reason} enqueuedAt={EnqueuedAt}",
+            messageId, deadLetterReason, enqueuedTime);
+    }
+
     // Written before every mutating operation.
     private static async Task WriteAuditAsync(
         SqlConnection conn, string actor, string resource, string resourceId,
