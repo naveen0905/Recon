@@ -9,8 +9,8 @@
 ## Current State
 
 - **Current Phase:** 3
-- **Last Completed Task:** 3.6 — Phase 3 complete (all workers, staleness engine, retrigger API)
-- **Next Task:** 4.1 — SkillRegistry and SkillExecutor
+- **Last Completed Task:** 4.7 — Phase 4 complete (full API, auth, all controllers, SkillRegistry)
+- **Next Task:** 5.1 — Agent query builder
 
 ## Confirmed Architectural Decisions
 

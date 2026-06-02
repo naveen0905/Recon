@@ -2,12 +2,10 @@
   <ItemGroup>
     <PackageReference Include="Serilog.AspNetCore" />
     <PackageReference Include="Serilog.Sinks.Console" />
-    <!--
-      Authentication packages added in Task 4.2:
-        Microsoft.AspNetCore.Authentication.JwtBearer
-        Microsoft.Identity.Web
-      Azure Monitor sink added in Task 7.1.
-    -->
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <PackageReference Include="Microsoft.Identity.Web" />
+    <PackageReference Include="Azure.Identity" />
+    <PackageReference Include="Azure.Messaging.ServiceBus" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../ReconPlatform.Config/ReconPlatform.Config.csproj" />
