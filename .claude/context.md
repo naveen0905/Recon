@@ -9,8 +9,8 @@
 ## Current State
 
 - **Current Phase:** 3
-- **Last Completed Task:** 3.5 — ConnectorWorker, StalenessTimer, ChangeFeedWorker, StalenessChecker, RetriggerOrchestrator
-- **Next Task:** 3.6 — Retrigger API endpoint (POST /api/recon/retrigger)
+- **Last Completed Task:** 3.6 — Phase 3 complete (all workers, staleness engine, retrigger API)
+- **Next Task:** 4.1 — SkillRegistry and SkillExecutor
 
 ## Confirmed Architectural Decisions
 
