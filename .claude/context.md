@@ -9,8 +9,8 @@
 ## Current State
 
 - **Current Phase:** 3
-- **Last Completed Task:** 2.8 — Phase 2 complete (all connectors, normalizer, diff engine, Python agent scaffold)
-- **Next Task:** 3.1 — StalenessChecker
+- **Last Completed Task:** 3.5 — ConnectorWorker, StalenessTimer, ChangeFeedWorker, StalenessChecker, RetriggerOrchestrator
+- **Next Task:** 3.6 — Retrigger API endpoint (POST /api/recon/retrigger)
 
 ## Confirmed Architectural Decisions
 
