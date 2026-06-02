@@ -147,6 +147,7 @@ builder.Services.AddSingleton<SkillExecutor>();
 // ── Connectors ────────────────────────────────────────────────────────────────
 
 builder.Services.AddHttpClient();
+builder.Services.AddHttpClient("agent");
 
 builder.Services.AddSingleton<RestApiConnector>();
 builder.Services.AddSingleton<AzureSqlConnector>();

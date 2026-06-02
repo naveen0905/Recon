@@ -160,10 +160,10 @@ Mark tasks `[x]` as completed. Update "Current Phase" in `.claude/context.md` af
 
 **Goal:** Python LLM agent queries recon data conversationally within engagement scope.
 
-- [ ] 5.1 Implement query builder (`agent/query_builder.py`)
-- [ ] 5.2 Implement agent orchestrator (`agent/orchestrator.py`)
-- [ ] 5.3 `POST /api/agent/query` in C# API (proxies to Python agent Container App)
-- [ ] 5.4 Agent skill YAML example (`skills/agents/scope-validator.yaml`)
+- [x] 5.1 Implement query builder (`agent/query_builder.py`)
+- [x] 5.2 Implement agent orchestrator (`agent/orchestrator.py`)
+- [x] 5.3 `POST /api/agent/query` in C# API (proxies to Python agent Container App)
+- [x] 5.4 Agent skill YAML example (`skills/agents/scope-validator.yaml`)
 
 **Acceptance Criteria:**
 - Agent correctly routes 5 test queries to the right tool

@@ -2,14 +2,29 @@ id: scope-validator
 name: Scope Validator Agent
 version: 1
 type: llm_agent
-description: Validates that all queried assets fall within the active engagement scope.
-model: anthropic/claude-sonnet-4-6   # or azure_openai/gpt-4o
+description: >
+  Validates that all queried assets fall within the active engagement scope.
+  Blocks queries that would expose out-of-scope assets and flags violations to audit_log.
+model: anthropic/claude-sonnet-4-6
 system_prompt: |
   You are a scope enforcement agent for a penetration testing platform.
-  You must ensure all asset queries are restricted to the active engagement scope.
-  Reject any query that would return assets outside the defined scope_teams or scope_targets.
+  You will be given a list of assets and an engagement scope (scope_targets, scope_teams).
+  Your job:
+    1. Check each asset's team and host against the engagement scope.
+    2. Return ONLY assets that are within scope.
+    3. For each out-of-scope asset, log a scope_violation event.
+  Never return assets whose team does not match the engagement's scope_teams.
+  Never return assets whose host/IP does not match the engagement's scope_targets.
+  If ALL assets are out of scope, return an empty list and explain why.
+triggers:
+  - type: asset_change
+    condition: "asset.team != engagement.team"
+  - type: manual
+actions:
+  - type: notify
+    channel: audit_log
+    message: "Scope violation detected: asset {asset_id} outside engagement scope {engagement_id}"
 tools:
   - query_assets
   - get_engagement_scope
-  - flag_out_of_scope
 enabled: true

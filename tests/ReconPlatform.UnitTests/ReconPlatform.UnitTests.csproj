@@ -21,5 +21,6 @@
     <ProjectReference Include="../../src/ReconPlatform.Connectors/ReconPlatform.Connectors.csproj" />
     <ProjectReference Include="../../src/ReconPlatform.Storage/ReconPlatform.Storage.csproj" />
     <ProjectReference Include="../../src/ReconPlatform.Common/ReconPlatform.Common.csproj" />
+    <ProjectReference Include="../../src/ReconPlatform.Api/ReconPlatform.Api.csproj" />
   </ItemGroup>
 </Project>
