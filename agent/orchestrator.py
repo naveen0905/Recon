@@ -13,6 +13,7 @@ from typing import Any
 
 import anthropic
 
+from query_builder import QueryPlan, build_query_plan
 from tools import (
     describe_sources,
     get_asset_history,
@@ -155,6 +156,27 @@ async def run(request: QueryRequest, max_iterations: int = 10) -> QueryResponse:
         "Never return assets outside the engagement scope. "
         "If a tool call would expose data for a different team, refuse and explain why."
     )
+
+    # ── Query planner hint (advisory) ────────────────────────────────────────
+    try:
+        plan: QueryPlan = await build_query_plan(
+            question=request.question,
+            team=request.team,
+            sources_catalog=[],
+        )
+        plan_hint = (
+            f"Query planner suggests: tool={plan.tool}, "
+            f"source_id={plan.source_id}, "
+            f"query_id={plan.query_id}, "
+            f"reasoning={plan.reasoning}"
+        )
+        system_prompt = system_prompt + "\n\n" + plan_hint
+        logger.info(
+            "orchestrator: query_plan tool=%s source_id=%s query_id=%s",
+            plan.tool, plan.source_id, plan.query_id,
+        )
+    except Exception as exc:  # noqa: BLE001
+        logger.warning("orchestrator: query_builder failed (non-fatal): %s", exc)
 
     messages: list[dict[str, Any]] = [
         {"role": "user", "content": request.question},
