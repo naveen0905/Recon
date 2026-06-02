@@ -9,8 +9,8 @@
 ## Current State
 
 - **Current Phase:** 3
-- **Last Completed Task:** 2.8 — Phase 2 complete (all connectors, normalizer, diff engine, Python agent scaffold)
-- **Next Task:** 3.1 — StalenessChecker
+- **Last Completed Task:** 3.6 — Phase 3 complete (all workers, staleness engine, retrigger API)
+- **Next Task:** 4.1 — SkillRegistry and SkillExecutor
 
 ## Confirmed Architectural Decisions
 

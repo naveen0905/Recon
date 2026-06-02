@@ -122,12 +122,12 @@ Mark tasks `[x]` as completed. Update "Current Phase" in `.claude/context.md` af
 
 **Goal:** Staleness detection, Service Bus integration, Container App workers.
 
-- [ ] 3.1 Implement staleness checker (`ReconPlatform.Engine/StalenessChecker.cs`)
-- [ ] 3.2 Implement retrigger orchestrator (`ReconPlatform.Engine/RetriggerOrchestrator.cs`)
-- [ ] 3.3 Implement Staleness Timer worker (`ReconPlatform.Workers/StalenessTimer/`)
-- [ ] 3.4 Implement Connector Worker (`ReconPlatform.Workers/ConnectorWorker/`)
-- [ ] 3.5 Implement Change Feed Worker (`ReconPlatform.Workers/ChangeFeedWorker/`)
-- [ ] 3.6 Retrigger API endpoint (`POST /api/recon/retrigger`)
+- [x] 3.1 Implement staleness checker (`ReconPlatform.Engine/StalenessChecker.cs`)
+- [x] 3.2 Implement retrigger orchestrator (`ReconPlatform.Engine/RetriggerOrchestrator.cs`)
+- [x] 3.3 Implement Staleness Timer worker (`ReconPlatform.Workers/StalenessTimer/`)
+- [x] 3.4 Implement Connector Worker (`ReconPlatform.Workers/ConnectorWorker/`)
+- [x] 3.5 Implement Change Feed Worker (`ReconPlatform.Workers/ChangeFeedWorker/`)
+- [x] 3.6 Retrigger API endpoint (`POST /api/recon/retrigger`)
 
 **Acceptance Criteria:**
 - Staleness timer produces correct Service Bus messages given mock Cosmos state
