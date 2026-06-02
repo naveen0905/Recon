@@ -8,9 +8,9 @@
 
 ## Current State
 
-- **Current Phase:** 3
-- **Last Completed Task:** 4.7 — Phase 4 complete (full API, auth, all controllers, SkillRegistry)
-- **Next Task:** 5.1 — Agent query builder
+- **Current Phase:** 5
+- **Last Completed Task:** 5.4 — Phase 5 complete (query builder, orchestrator, C# proxy, scope-validator skill)
+- **Next Task:** 6.1 — Audit logging verification
 
 ## Confirmed Architectural Decisions
 
